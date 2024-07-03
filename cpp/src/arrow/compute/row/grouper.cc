@@ -731,7 +731,7 @@ struct GrouperFastImpl : public Grouper {
         minibatch_size_ *= 2;
       }
     }
-    // 保存所有batch防止被free
+    // keep all batch prevent being freed
     group_by_key_batches_.InsertBatch(batch.ToExecBatch());
     return Datum(UInt32Array(batch.length, std::move(group_ids)));
   }
@@ -782,8 +782,6 @@ struct GrouperFastImpl : public Grouper {
       } else {
         ARROW_ASSIGN_OR_RAISE(fixedlen_bufs[i],
                               AllocatePaddedBuffer((num_groups + 1) * col_metadata_[i].fixed_length));
-        // 变长列的定长部分为offset，格式为0,offset1,offset2...
-        // 初始化offset为0，防止num_groups == 0（空表）的情况下offset不会被初始化
         if (col_metadata_[i].is_binary()) {
           reinterpret_cast<uint32_t*>(fixedlen_bufs[i]->mutable_data())[0] = 0;
         } else if (col_metadata_[i].is_large_binary()) {
@@ -863,7 +861,6 @@ struct GrouperFastImpl : public Grouper {
         }
       }
     }
-    // 清理下游发上来的batch
     group_by_key_batches_.Clear();
 
     return out;

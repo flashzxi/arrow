@@ -108,7 +108,6 @@ void KeyCompare::CompareBinaryColumnToRowHelper(
   }
 }
 
-/// offset_within_row 编码后字段是乱序的，表示编码后对应哪一列
 template <bool use_selection>
 void KeyCompare::CompareBinaryColumnToRow(uint32_t offset_within_row,
                                           uint32_t num_rows_to_compare,

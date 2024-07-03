@@ -633,7 +633,6 @@ Status ExecBatchBuilder::AppendSelected(const std::shared_ptr<ArrayData>& source
         NumRowsToSkip(source, num_rows_to_append, row_ids, sizeof(uint64_t));
     Visit(source, num_rows_to_process, row_ids,
           [&](int i, const uint8_t* ptr, uint32_t num_bytes) {
-            // 三元运算符优先级非常低
             uint64_t* dst = reinterpret_cast<uint64_t*>(target->mutable_data(2) +
                                                         (is_large_binary ? offsets64[num_rows_before + i]: 
                                                                           offsets32[num_rows_before + i]));

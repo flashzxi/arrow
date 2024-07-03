@@ -285,7 +285,6 @@ Status RowArray::DecodeSelected(ResizableArrayData* output, int column_id,
     }
   } else {
     bool is_large_binary = column_metadata.is_large_binary();
-    // large binary 使用64位的offset
     if (is_large_binary) {
         uint64_t* offsets =
           reinterpret_cast<uint64_t*>(output->mutable_data(1)) + num_rows_before;

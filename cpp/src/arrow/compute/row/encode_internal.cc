@@ -61,7 +61,6 @@ void RowTableEncoder::PrepareKeyColumnArrays(int64_t start_row, int64_t num_rows
   }
 }
 
-// 只影响hash grouper
 void RowTableEncoder::DecodeFixedLengthBuffers(int64_t start_row_input,
                                                int64_t start_row_output, int64_t num_rows,
                                                const RowTableImpl& rows,
