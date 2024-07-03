@@ -118,7 +118,6 @@ struct RowArray {
                               std::vector<KeyColumnArray>& temp_column_arrays);
 
   // This can only be called for a minibatch.
-  //
   void Compare(const ExecBatch& batch, int begin_row_id, int end_row_id, int num_selected,
                const uint16_t* batch_selection_maybe_null, const uint32_t* array_row_ids,
                uint32_t* out_num_not_equal, uint16_t* out_not_equal_selection,
@@ -192,18 +191,9 @@ class RowArrayMerge {
   // Copy rows from source array to a region of the target array.
   // This implementation is for fixed length rows.
   // Null information needs to be handled separately.
-  //
-  static void CopyFixedLength(RowTableImpl* target, const RowTableImpl& source,
-                              int64_t first_target_row_id,
-                              const int64_t* source_rows_permutation);
 
-  // Copy rows from source array to a region of the target array.
-  // This implementation is for varying length rows.
-  // Null information needs to be handled separately.
-  //
-  static void CopyVaryingLength(RowTableImpl* target, const RowTableImpl& source,
+  static void CopyFixedVarLength(RowTableImpl* target, const RowTableImpl& source,
                                 int64_t first_target_row_id,
-                                int64_t first_target_row_offset,
                                 const int64_t* source_rows_permutation);
 
   // Copy null information from rows from source array to a region of the target
