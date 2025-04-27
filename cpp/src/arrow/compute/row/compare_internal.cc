@@ -46,7 +46,7 @@ void KeyCompare::NullUpdateColumnToRow(uint32_t id_col, uint32_t num_rows_to_com
   if (ctx->has_avx2()) {
     num_processed = NullUpdateColumnToRow_avx2(use_selection, id_col, num_rows_to_compare,
                                                sel_left_maybe_null, left_to_right_map,
-                                               ctx, col, rows, match_bytevector);
+                                               ctx, col, rows, match_bytevector, are_cols_in_encoding_order);
   }
 #endif
 
@@ -108,7 +108,6 @@ void KeyCompare::CompareBinaryColumnToRowHelper(
   }
 }
 
-/// offset_within_row 编码后字段是乱序的，表示编码后对应哪一列
 template <bool use_selection>
 void KeyCompare::CompareBinaryColumnToRow(uint32_t offset_within_row,
                                           uint32_t num_rows_to_compare,

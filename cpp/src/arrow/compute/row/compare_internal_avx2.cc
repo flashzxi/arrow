@@ -40,12 +40,12 @@ template <bool use_selection>
 uint32_t KeyCompare::NullUpdateColumnToRowImp_avx2(
     uint32_t id_col, uint32_t num_rows_to_compare, const uint16_t* sel_left_maybe_null,
     const uint32_t* left_to_right_map, LightContext* ctx, const KeyColumnArray& col,
-    const RowTableImpl& rows, uint8_t* match_bytevector) {
+    const RowTableImpl& rows, uint8_t* match_bytevector, bool are_cols_in_encoding_order) {
   if (!rows.has_any_nulls(ctx) && !col.data(0)) {
     return num_rows_to_compare;
   }
 
-  uint32_t null_bit_id = rows.metadata().pos_after_encoding(id_col);
+  uint32_t null_bit_id = are_cols_in_encoding_order ? id_col : rows.metadata().pos_after_encoding(id_col);
 
   if (!col.data(0)) {
     // Remove rows from the result for which the column value is a null
@@ -542,7 +542,7 @@ uint32_t KeyCompare::NullUpdateColumnToRow_avx2(
     bool use_selection, uint32_t id_col, uint32_t num_rows_to_compare,
     const uint16_t* sel_left_maybe_null, const uint32_t* left_to_right_map,
     LightContext* ctx, const KeyColumnArray& col, const RowTableImpl& rows,
-    uint8_t* match_bytevector) {
+    uint8_t* match_bytevector, bool are_cols_in_encoding_order) {
   int64_t num_rows_safe =
       TailSkipForSIMD::FixBitAccess(sizeof(uint32_t), col.length(), col.bit_offset(0));
   if (sel_left_maybe_null) {
@@ -555,11 +555,11 @@ uint32_t KeyCompare::NullUpdateColumnToRow_avx2(
   if (use_selection) {
     return NullUpdateColumnToRowImp_avx2<true>(id_col, num_rows_to_compare,
                                                sel_left_maybe_null, left_to_right_map,
-                                               ctx, col, rows, match_bytevector);
+                                               ctx, col, rows, match_bytevector, are_cols_in_encoding_order);
   } else {
     return NullUpdateColumnToRowImp_avx2<false>(id_col, num_rows_to_compare,
                                                 sel_left_maybe_null, left_to_right_map,
-                                                ctx, col, rows, match_bytevector);
+                                                ctx, col, rows, match_bytevector, are_cols_in_encoding_order);
   }
 }
 
