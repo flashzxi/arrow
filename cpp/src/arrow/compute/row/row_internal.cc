@@ -22,6 +22,8 @@
 namespace arrow {
 namespace compute {
 
+const uint32_t RowTableMetadata::kBinaryViewSize = sizeof(BinaryView);
+
 uint32_t RowTableMetadata::num_varbinary_cols() const {
   uint32_t result = 0;
   for (auto column_metadata : column_metadatas) {
