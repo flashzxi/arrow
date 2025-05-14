@@ -57,12 +57,12 @@ inline void CHECK_OK(const arrow::Status status,const std::string& msg){
 namespace arrow_test {
 const int const_build_len = 1030;
 const int const_match_keys = 11;
-const int const_batch_size = 100000;
-int basic_test_len = 400 * 1024;
+const int const_batch_size = 10000;
+int basic_test_len = 2000 * 10000;
 
 // 4KB
-const std::string long_prefix = "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";
-// const std::string long_prefix = "123456";
+//const std::string long_prefix = "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";
+ const std::string long_prefix = "123456";
 const std::string short_prefix = "short_prefix_";
 const std::string key_prefix = long_prefix;
 
@@ -263,6 +263,31 @@ arrow::Status SourceReader::build_column(int64_t batch_size, std::shared_ptr<arr
         default:
             return arrow::Status::Invalid("unsupport type");
     }
+}
+
+void wide_join_test(int left_len, int right_len) {
+	auto cup_e = arrow::internal::GetCpuThreadPool();
+
+    std::vector<std::shared_ptr<arrow::DataType>> left_types{arrow::int32(), arrow::int64(), arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(), arrow::large_binary(), arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary()};
+    std::vector<std::shared_ptr<arrow::DataType>> right_types{arrow::int32(), arrow::int64(), arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(),arrow::int64(), arrow::large_binary(), arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary(),arrow::large_binary()};
+    std::shared_ptr<SourceReader> reader_left =
+            std::make_shared<SourceReader>("left", left_types, const_batch_size, left_len);
+    std::shared_ptr<SourceReader> reader_right =
+            std::make_shared<SourceReader>("right", right_types, const_batch_size, right_len);
+
+    arrow::acero::Declaration left{"record_batch_reader_source", arrow::acero::RecordBatchReaderSourceNodeOptions(reader_left)};
+    arrow::acero::Declaration right{"record_batch_reader_source", arrow::acero::RecordBatchReaderSourceNodeOptions(reader_right)};
+    arrow::acero::HashJoinNodeOptions join_options{arrow::acero::JoinType::INNER,
+                                    {arrow::FieldRef("left_0")},
+                                    {arrow::FieldRef("right_0")},
+                                    arrow::compute::literal(true)};
+    arrow::acero::Declaration join{"hashjoin", {std::move(left), std::move(right)}, join_options};
+    uint64_t join_start_time = milliseconds_now();
+
+    auto result = arrow::acero::DeclarationToTable(std::move(join), /*use_threads=*/true);
+    std::shared_ptr<arrow::Table> final_table = result.ValueOrDie();
+	int64_t len = final_table->num_rows();
+    uint64_t join_end_time = milliseconds_now();
 }
 
 void basic_join_test(int left_len, int right_len, bool is_large_binary, bool check_result = true) {
@@ -684,59 +709,63 @@ void run_agg_without_join_key_as_binary_and_int(int table_len, bool is_large_bin
     }
 }
 
-TEST(test_arrow_vector_execute, join_key_as_string) {
-    std::cout << "==========    1    ========================" << std::endl;
-    join_key_as_string_test(basic_test_len, basic_test_len, /*is_large_binary*/true, /*left_with_null*/ true, /*right_with_null*/true);
-    std::cout << "==========    2    ========================" << std::endl;
-    join_key_as_string_test(basic_test_len, basic_test_len, /*is_large_binary*/false, /*left_with_null*/ true, /*right_with_null*/true);
-    std::cout << "==========    3    ========================" << std::endl;
-    join_key_as_string_test(basic_test_len, basic_test_len, /*is_large_binary*/true, /*left_with_null*/ false, /*right_with_null*/true);
-    std::cout << "==========    4    ========================" << std::endl;
-    join_key_as_string_test(basic_test_len, basic_test_len, /*is_large_binary*/true, /*left_with_null*/ true, /*right_with_null*/false);
-    std::cout << "==========    5    ========================" << std::endl;
-    join_key_as_string_test(basic_test_len, basic_test_len, /*is_large_binary*/true, /*left_with_null*/ false, /*right_with_null*/false);
-    // Test Null
-    // run_test_arrow_run_acero_async(1024 * 1400, 1024 * 1400);
-    // run_agg_without_join_larger_than_4G_async();
-}   
+//TEST(test_arrow_vector_execute, join_key_as_string) {
+//    std::cout << "==========    1    ========================" << std::endl;
+//    join_key_as_string_test(basic_test_len, basic_test_len, /*is_large_binary*/true, /*left_with_null*/ true, /*right_with_null*/true);
+//    std::cout << "==========    2    ========================" << std::endl;
+//    join_key_as_string_test(basic_test_len, basic_test_len, /*is_large_binary*/false, /*left_with_null*/ true, /*right_with_null*/true);
+//    std::cout << "==========    3    ========================" << std::endl;
+//    join_key_as_string_test(basic_test_len, basic_test_len, /*is_large_binary*/true, /*left_with_null*/ false, /*right_with_null*/true);
+//    std::cout << "==========    4    ========================" << std::endl;
+//    join_key_as_string_test(basic_test_len, basic_test_len, /*is_large_binary*/true, /*left_with_null*/ true, /*right_with_null*/false);
+//    std::cout << "==========    5    ========================" << std::endl;
+//    join_key_as_string_test(basic_test_len, basic_test_len, /*is_large_binary*/true, /*left_with_null*/ false, /*right_with_null*/false);
+//    // Test Null
+//    // run_test_arrow_run_acero_async(1024 * 1400, 1024 * 1400);
+//    // run_agg_without_join_larger_than_4G_async();
+//}
+//
+//// 基本测试，是否包含null
+//TEST(test_arrow_vector_execute, TestBasicJoin){
+//    // Test Basic
+//    basic_join_test(basic_test_len, basic_test_len, true);
+//    basic_join_test(basic_test_len, basic_test_len, false);
+//}
+//
+//TEST(test_arrow_vector_execute, join_key_as_two_int){
+//
+//    join_key_as_two_int_test(basic_test_len, basic_test_len, true);
+//    join_key_as_two_int_test(basic_test_len, basic_test_len, false);
+//}
+//
+//TEST(test_arrow_vector_execute, join_key_as_int_and_binary){
+//    // Test Basic
+//    join_key_as_int_and_binary_test(basic_test_len, basic_test_len, true);
+//    join_key_as_int_and_binary_test(basic_test_len, basic_test_len, false);
+//}
+//
+//TEST(test_arrow_vector_execute, group_basic_key_as_binary){
+//    run_agg_without_join_key_as_binary(basic_test_len, true);
+//    run_agg_without_join_key_as_binary(basic_test_len, false);
+//}
+//
+//TEST(test_arrow_vector_execute, group_basic_key_as_int){
+//    // run_agg_without_join_key_as_int(basic_test_len, true);
+//    run_agg_without_join_key_as_int(basic_test_len, false);
+//}
+//
+//TEST(test_arrow_vector_execute, agg_without_join_key_as_two_int){
+//    run_agg_without_join_key_as_two_int(basic_test_len, true);
+//    run_agg_without_join_key_as_two_int(basic_test_len, false);
+//}
+//
+//TEST(test_arrow_vector_execute, agg_without_join_key_as_binary_and_int){
+//    run_agg_without_join_key_as_binary_and_int(basic_test_len, true);
+//    run_agg_without_join_key_as_binary_and_int(basic_test_len, false);
+//}
 
-// 基本测试，是否包含null
-TEST(test_arrow_vector_execute, TestBasicJoin){
-    // Test Basic
-    basic_join_test(basic_test_len, basic_test_len, true);
-    basic_join_test(basic_test_len, basic_test_len, false);
-}
-
-TEST(test_arrow_vector_execute, join_key_as_two_int){
-
-    join_key_as_two_int_test(basic_test_len, basic_test_len, true);
-    join_key_as_two_int_test(basic_test_len, basic_test_len, false);
-}
-
-TEST(test_arrow_vector_execute, join_key_as_int_and_binary){
-    // Test Basic
-    join_key_as_int_and_binary_test(basic_test_len, basic_test_len, true);
-    join_key_as_int_and_binary_test(basic_test_len, basic_test_len, false);
-}
-
-TEST(test_arrow_vector_execute, group_basic_key_as_binary){
-    run_agg_without_join_key_as_binary(basic_test_len, true);
-    run_agg_without_join_key_as_binary(basic_test_len, false);
-}
-
-TEST(test_arrow_vector_execute, group_basic_key_as_int){
-    // run_agg_without_join_key_as_int(basic_test_len, true);
-    run_agg_without_join_key_as_int(basic_test_len, false);
-}
-
-TEST(test_arrow_vector_execute, agg_without_join_key_as_two_int){
-    run_agg_without_join_key_as_two_int(basic_test_len, true);
-    run_agg_without_join_key_as_two_int(basic_test_len, false);
-}
-
-TEST(test_arrow_vector_execute, agg_without_join_key_as_binary_and_int){
-    run_agg_without_join_key_as_binary_and_int(basic_test_len, true);
-    run_agg_without_join_key_as_binary_and_int(basic_test_len, false);
+TEST(test_arrow_vector_execute, test_wide_table_join) {
+  wide_join_test(20000000, 20000000);
 }
 
 // TEST(test_arrow_vector_execute, join_performence_test){

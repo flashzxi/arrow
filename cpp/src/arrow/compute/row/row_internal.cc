@@ -277,7 +277,7 @@ Status RowTableImpl::AppendSelectionFrom(const RowTableImpl& from,
   RETURN_NOT_OK(ResizeBuffers(num_rows_to_append));
 
   const uint8_t* src = from.rows_->data();
-  uint32_t length = metadata_.row_length();
+  uint64_t length = metadata_.row_length();
   uint8_t* dst = rows_->mutable_data() + num_rows_ * metadata_.row_length();
   for (uint32_t i = 0; i < num_rows_to_append; ++i) {
     uint16_t row_id = source_row_ids ? source_row_ids[i] : i;

@@ -70,7 +70,7 @@ int RowArrayAccessor::NumRowsToSkip(const RowTableImpl& rows, int column_id, int
     // Varying length column
     //
     int varbinary_column_id = VarbinaryColumnId(rows.metadata(), column_id);
-    const uint32_t row_width = rows.metadata().row_length();
+    const uint64_t row_width = rows.metadata().row_length();
 
     while (num_rows_left > 0 &&
            num_bytes_skipped < static_cast<uint32_t>(num_tail_bytes_to_skip)) {
@@ -114,9 +114,9 @@ Status RowArrayAccessor::Visit(const RowTableImpl& rows, int column_id, int num_
   if (!is_fixed_length_column) {
     const uint8_t* row_ptr_base = rows.data(1);
     int varbinary_column_id = VarbinaryColumnId(rows.metadata(), column_id);
-    uint32_t single_row_width = metadata.row_length();
+    uint64_t single_row_width = metadata.row_length();
 
-    for (int i = 0; i < num_rows; ++i) {
+    for (uint64_t i = 0; i < num_rows; ++i) {
       uint32_t row_id = row_ids[i];
       const uint8_t* row_ptr = row_ptr_base + row_id * single_row_width;
       const BinaryView* varbinary_view_ptr = metadata.nth_varbinary_ptr(row_ptr, varbinary_column_id);
@@ -137,7 +137,7 @@ Status RowArrayAccessor::Visit(const RowTableImpl& rows, int column_id, int num_
     if (field_length == 0) {
       field_length = 1;
     }
-    uint32_t row_length = rows.metadata().row_length();
+    uint64_t row_length = rows.metadata().row_length();
 
     const uint8_t* row_ptr_base = rows.data(1) + field_offset_within_row;
     for (int i = 0; i < num_rows; ++i) {

@@ -97,13 +97,13 @@ void KeyCompare::CompareBinaryColumnToRowHelper(
     uint32_t num_rows_to_compare, const uint16_t* sel_left_maybe_null,
     const uint32_t* left_to_right_map, LightContext* ctx, const KeyColumnArray& col,
     const RowTableImpl& rows, uint8_t* match_bytevector, COMPARE_FN compare_fn) {
-  uint32_t row_length = rows.metadata().row_length();
+  uint64_t row_length = rows.metadata().row_length();
   const uint8_t* rows_left = col.data(1);
   const uint8_t* rows_right = rows.data(1);
   for (uint32_t i = first_row_to_compare; i < num_rows_to_compare; ++i) {
     uint32_t irow_left = use_selection ? sel_left_maybe_null[i] : i;
     uint32_t irow_right = left_to_right_map[irow_left];
-    uint32_t offset_right = irow_right * row_length + offset_within_row;
+    uint64_t offset_right = irow_right * row_length + offset_within_row;
     match_bytevector[i] = compare_fn(rows_left, rows_right, irow_left, offset_right);
   }
 }
@@ -132,7 +132,7 @@ void KeyCompare::CompareBinaryColumnToRow(uint32_t offset_within_row,
         offset_within_row, num_processed, num_rows_to_compare, sel_left_maybe_null,
         left_to_right_map, ctx, col, rows, match_bytevector,
         [bit_offset](const uint8_t* left_base, const uint8_t* right_base,
-                     uint32_t irow_left, uint32_t offset_right) {
+                     uint32_t irow_left, uint64_t offset_right) {
           uint8_t left =
               bit_util::GetBit(left_base, irow_left + bit_offset) ? 0xff : 0x00;
           uint8_t right = right_base[offset_right];
@@ -143,7 +143,7 @@ void KeyCompare::CompareBinaryColumnToRow(uint32_t offset_within_row,
         offset_within_row, num_processed, num_rows_to_compare, sel_left_maybe_null,
         left_to_right_map, ctx, col, rows, match_bytevector,
         [](const uint8_t* left_base, const uint8_t* right_base, uint32_t irow_left,
-           uint32_t offset_right) {
+           uint64_t offset_right) {
           uint8_t left = left_base[irow_left];
           uint8_t right = right_base[offset_right];
           return left == right ? 0xff : 0;
@@ -153,7 +153,7 @@ void KeyCompare::CompareBinaryColumnToRow(uint32_t offset_within_row,
         offset_within_row, num_processed, num_rows_to_compare, sel_left_maybe_null,
         left_to_right_map, ctx, col, rows, match_bytevector,
         [](const uint8_t* left_base, const uint8_t* right_base, uint32_t irow_left,
-           uint32_t offset_right) {
+           uint64_t offset_right) {
           util::CheckAlignment<uint16_t>(left_base);
           util::CheckAlignment<uint16_t>(right_base + offset_right);
           uint16_t left = reinterpret_cast<const uint16_t*>(left_base)[irow_left];
@@ -177,7 +177,7 @@ void KeyCompare::CompareBinaryColumnToRow(uint32_t offset_within_row,
         offset_within_row, num_processed, num_rows_to_compare, sel_left_maybe_null,
         left_to_right_map, ctx, col, rows, match_bytevector,
         [](const uint8_t* left_base, const uint8_t* right_base, uint32_t irow_left,
-           uint32_t offset_right) {
+           uint64_t offset_right) {
           util::CheckAlignment<uint64_t>(left_base);
           util::CheckAlignment<uint64_t>(right_base + offset_right);
           uint64_t left = reinterpret_cast<const uint64_t*>(left_base)[irow_left];
@@ -189,7 +189,7 @@ void KeyCompare::CompareBinaryColumnToRow(uint32_t offset_within_row,
         offset_within_row, num_processed, num_rows_to_compare, sel_left_maybe_null,
         left_to_right_map, ctx, col, rows, match_bytevector,
         [&col](const uint8_t* left_base, const uint8_t* right_base, uint32_t irow_left,
-               uint32_t offset_right) {
+               uint64_t offset_right) {
           uint32_t length = col.metadata().fixed_length;
 
           // Non-zero length guarantees no underflow
@@ -233,7 +233,7 @@ void KeyCompare::CompareVarBinaryColumnToRowHelper(
   // const uint32_t* offsets_right = rows.offsets();
   const uint8_t* rows_left = col.data(2);
   const uint8_t* rows_right = rows.data(1);
-  uint32_t row_length = rows.metadata().row_length();
+  uint64_t row_length = rows.metadata().row_length();
   for (uint32_t i = first_row_to_compare; i < num_rows_to_compare; ++i) {
     uint32_t irow_left = use_selection ? sel_left_maybe_null[i] : i;
     uint32_t irow_right = left_to_right_map[irow_left];

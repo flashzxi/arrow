@@ -164,7 +164,7 @@ struct ARROW_EXPORT RowTableMetadata {
   /// Offsets within a row to fields in their encoding order.
   std::vector<uint32_t> column_offsets;
 
-  inline uint32_t row_length() const {
+  inline uint64_t row_length() const {
     return fixed_length + varbinary_view_length;
   }
 
